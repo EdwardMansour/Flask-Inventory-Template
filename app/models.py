@@ -26,8 +26,8 @@ class User(db.Model):
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    amount = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(80), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
     is_destroyed = db.Column(db.Boolean, default=False, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     expiry_date = db.Column(db.Date(), nullable=True)

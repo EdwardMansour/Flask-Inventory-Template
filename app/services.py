@@ -1,5 +1,15 @@
+from datetime import datetime
+
 from app import db
 from app.models import User, Product
+
+
+def create_superuser(username, password, date_of_birth):
+    user = User(username=username, date_of_birth=datetime.strptime(date_of_birth, "%Y-%m-%d"), role='ADMIN')
+    user.set_password(password)
+    db.session.add(user)
+    db.session.commit()
+    return user
 
 
 def create_user(username, password, date_of_birth):
@@ -24,13 +34,12 @@ def create_product(user_id, name, amount, expiry_date):
     return product
 
 
-def update_product(product_id, amount, name, expiry_date=None):
+def update_product(product_id, name, amount, expiry_date):
     product = Product.query.get(product_id)
     if product:
         product.name = name
         product.amount = amount
-        if expiry_date:
-            product.expiry_date = expiry_date
+        product.expiry_date = expiry_date
         db.session.commit()
     return product
 
@@ -40,4 +49,4 @@ def destroy_product(product_id):
     if product:
         product.is_destroyed = True
         db.session.commit()
-    return Product
+    return product
