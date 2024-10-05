@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .:/src
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://anonymous:strongPassword@postgres:5432/inventory
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:alpine
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=anonymous
+      - POSTGRES_PASSWORD=strongPassword
+      - POSTGRES_DB=inventory
+    ports:
+      - "5432:5432"
