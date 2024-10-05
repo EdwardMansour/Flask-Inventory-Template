@@ -1,23 +1,26 @@
 services:
   app:
     build: .
-    volumes:
-      - .:/src
     ports:
       - "5000:5000"
-    environment:
-      - FLASK_APP=app.py
-      - FLASK_ENV=development
-      - DATABASE_URL=postgresql://anonymous:strongPassword@postgres:5432/inventory
+    env_file:
+      - .env.docker
     depends_on:
       - postgres
+
   postgres:
     image: postgres:alpine
     container_name: postgres
     restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db_dump.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - POSTGRES_USER=anonymous
       - POSTGRES_PASSWORD=strongPassword
       - POSTGRES_DB=inventory
     ports:
       - "5432:5432"
+
+volumes:
+    postgres_data:

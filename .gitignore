@@ -27,10 +27,6 @@ instance/
 .cache
 .pytest_cache/
 
-# Environments
-.env
-.env.*
-
 # IDEs
 .vscode/
 .idea/
