@@ -2,6 +2,13 @@ from datetime import datetime
 
 from marshmallow import ValidationError
 
+from app.models import User
+
+
+def validate_unique_username(username):
+    if User.query.filter_by(username=username).first():
+        raise ValidationError('Username already exists.')
+
 
 def validate_date(value):
     try:

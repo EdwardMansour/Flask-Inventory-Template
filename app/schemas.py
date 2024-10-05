@@ -1,6 +1,6 @@
 from marshmallow import fields, Schema, validate, ValidationError
 
-from app.validators import validate_date, validate_expiry_date
+from app.validators import validate_date, validate_expiry_date, validate_unique_username
 
 
 # This File is Serializer
@@ -14,7 +14,8 @@ class UserSchema(Schema):
 
 
 class RegisterUserSchema(Schema):
-    username = fields.Str(required=True, validate=validate.Length(min=1, max=80))
+    username = fields.Str(required=True,
+                          validate=validate.And(validate.Length(min=1, max=80), validate_unique_username))
     password = fields.Str(required=True, validate=validate.Length(min=6, max=36))
     date_of_birth = fields.Str(required=True, validate=validate_date)
 
