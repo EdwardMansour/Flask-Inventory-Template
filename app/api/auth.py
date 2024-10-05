@@ -1,6 +1,8 @@
+from flasgger import swag_from
 from datetime import datetime
 
 from flask import request, jsonify
+
 from . import api_bp
 from app.services import create_user, authenticate_user
 from app.schemas import UserSchema, RegisterUserSchema
@@ -8,6 +10,7 @@ from flask_jwt_extended import create_access_token
 
 
 @api_bp.route('/register', methods=['POST'])
+@swag_from('../../swagger_docs/user_register.yaml')
 def register():
     data = request.get_json()
 
@@ -24,6 +27,7 @@ def register():
 
 
 @api_bp.route('/login', methods=['POST'])
+@swag_from('../../swagger_docs/login.yaml')
 def login():
     data = request.get_json()
     user = authenticate_user(data['username'], data['password'])

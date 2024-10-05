@@ -137,7 +137,7 @@ ALTER TABLE ONLY public."user" ALTER COLUMN id SET DEFAULT nextval('public.user_
 --
 
 COPY public.alembic_version (version_num) FROM stdin;
-4030d639ac74
+d7c6e469d11b
 \.
 
 
@@ -146,15 +146,21 @@ COPY public.alembic_version (version_num) FROM stdin;
 --
 
 COPY public.product (id, name, amount, is_destroyed, user_id, expiry_date) FROM stdin;
-1	item-1	2.5	f	3	2024-11-14
-2	item-2	2.5	f	3	2024-11-14
-3	item-3	2.5	f	3	2024-11-14
-4	item-1-1	2.5	f	1	2024-11-14
-5	item-1-2	2.5	f	1	2024-11-14
-6	item-1-3	2.5	f	1	2024-11-14
-7	item-1-admin	2.5	f	2	2024-11-14
-8	item-2-admin	2.5	f	2	2024-11-14
-9	item-3-admin	2.5	f	2	2024-11-14
+1	item-1-1	2.5	f	2	2024-11-14
+2	item-1-2	2.5	f	2	2024-11-14
+3	item-1-3	2.5	f	2	2024-11-14
+4	item-1-4	2.5	f	2	2024-11-14
+5	item-1-5	2.5	f	2	2024-11-14
+6	item-1	2.5	f	1	2024-11-14
+7	item-2	2.5	f	1	2024-11-14
+8	item-3	2.5	f	1	2024-11-14
+9	item-4	2.5	f	1	2024-11-14
+10	item-5	2.5	f	1	2024-11-14
+11	item-1-admin	2.5	f	3	2024-11-14
+12	item-2-admin	2.5	f	3	2024-11-14
+13	item-3-admin	2.5	f	3	2024-11-14
+14	item-4-admin	2.5	f	3	2024-11-14
+15	item-5-admin	2.5	f	3	2024-11-14
 \.
 
 
@@ -163,9 +169,9 @@ COPY public.product (id, name, amount, is_destroyed, user_id, expiry_date) FROM 
 --
 
 COPY public."user" (id, username, date_of_birth, role, password_hash) FROM stdin;
-1	edward1	1996-05-15	REGULAR	$2b$12$32z3h6c0BGpq0hrcm7y1VuSWOs/BlLp5UluXaNMQeD2tlvZzhyQ5S
-2	admin	1993-01-01	ADMIN	$2b$12$/8EvsSHcvYEK6TYox/qR5OKM8WfaT7IyD9ETU9zcweMGBtAnLQvUe
-3	edward	1996-05-15	REGULAR	$2b$12$3nc0PH1d1cPq8y23.2/Sb.Mv9oolMewV7a4ywCzTTHl3lwG6RezY6
+1	edward	1996-01-17	REGULAR	$2b$12$wv7dLp1YiBQyQAH27Cars.2E1O6UJI7ZotjzoXb0EFTjfOh/7zBnW
+2	edward-1	1996-01-17	REGULAR	$2b$12$tCtcXMGalF5zvL3jQ0vHbe9bg7v8lolbncubfzqkM4JFevlXYFhFa
+3	admin	2024-10-04	ADMIN	$2b$12$Y1BWd5uFcFXEyzDnKxU.YuwIdaODwaS5EACqyH2ZSjq.B8SxoTccq
 \.
 
 
@@ -173,14 +179,14 @@ COPY public."user" (id, username, date_of_birth, role, password_hash) FROM stdin
 -- Name: product_id_seq; Type: SEQUENCE SET; Schema: public; Owner: anonymous
 --
 
-SELECT pg_catalog.setval('public.product_id_seq', 9, true);
+SELECT pg_catalog.setval('public.product_id_seq', 15, true);
 
 
 --
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: anonymous
 --
 
-SELECT pg_catalog.setval('public.user_id_seq', 4, true);
+SELECT pg_catalog.setval('public.user_id_seq', 3, true);
 
 
 --

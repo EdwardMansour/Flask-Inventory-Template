@@ -1,0 +1,87 @@
+tags:
+  - Product Management
+summary: Update an existing product
+description: Endpoint for updating an existing product
+parameters:
+  - in: header
+    name: Authorization
+    description: JWT access token
+    required: true
+    schema:
+      type: string
+      format: JWT
+  - in: path
+    name: product_id
+    description: ID of the product to update
+    required: true
+    schema:
+      type: integer
+  - in: body
+    name: body
+    description: Product object that needs to be updated
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product
+        amount:
+          type: number
+          format: float
+          description: The amount of the product
+        expiry_date:
+          type: string
+          description: The expiry date of the product
+      required:
+        - name
+        - amount
+        - expiry_date
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: The name of the product
+          amount:
+            type: number
+            format: float
+            description: The amount of the product
+          expiry_date:
+            type: string
+            description: The expiry date of the product
+        required:
+          - name
+          - amount
+          - expiry_date
+responses:
+  200:
+    description: Product successfully updated
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the updated product
+            name:
+              type: string
+              description: The name of the product
+            amount:
+              type: number
+              format: float
+              description: The amount of the product
+            expiry_date:
+              type: string
+              description: The expiry date of the product
+            is_destroyed:
+              type: boolean
+              description: The status of the product
+  400:
+    description: Validation error
+  404:
+    description: Product not found

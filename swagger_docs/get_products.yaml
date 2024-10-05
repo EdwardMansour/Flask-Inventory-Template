@@ -1,0 +1,49 @@
+tags:
+  - Product Management
+summary: Retrieve all products
+description: Endpoint for retrieving all products
+parameters:
+  - in: header
+    name: Authorization
+    description: JWT access token
+    required: true
+    schema:
+      type: string
+      format: JWT
+  - in: query
+    name: is_expired
+    description: Filter products by expiration status
+    required: false
+    schema:
+      type: string
+      enum: [true, false]
+responses:
+  200:
+    description: List of products retrieved successfully
+    content:
+      application/json:
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Product ID
+              name:
+                type: string
+                description: Product name
+              amount:
+                type: number
+                description: Product amount
+              expiry_date:
+                type: string
+                format: date
+                description: Product expiry date
+              is_destroyed:
+                type: boolean
+                description: Product destruction status
+  400:
+    description: Validation error
+  401:
+    description: Unauthorized

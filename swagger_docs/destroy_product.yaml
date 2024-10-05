@@ -1,0 +1,33 @@
+tags:
+  - Product Management
+summary: Delete an existing product
+description: Endpoint for deleting an existing product
+parameters:
+  - in: header
+    name: Authorization
+    description: JWT access token
+    required: true
+    schema:
+      type: string
+      format: JWT
+  - in: path
+    name: product_id
+    description: ID of the product to delete
+    required: true
+    schema:
+      type: integer
+responses:
+  200:
+    description: Product successfully deleted
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Success message
+  400:
+    description: Validation error
+  404:
+    description: Product not found

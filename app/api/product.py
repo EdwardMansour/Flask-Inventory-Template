@@ -1,3 +1,4 @@
+from flasgger import swag_from
 from datetime import date, datetime
 
 from flask import request, jsonify
@@ -11,6 +12,7 @@ from ..models import Product, User, UserRole
 
 @api_bp.route('/products', methods=['POST'])
 @jwt_required()
+@swag_from('../../swagger_docs/create_product.yaml')
 def create():
     data = request.get_json()  # get body from request
     user_id = get_jwt_identity()
@@ -28,6 +30,7 @@ def create():
 
 @api_bp.route('/products/<int:product_id>', methods=['PUT'])
 @jwt_required()
+@swag_from('../../swagger_docs/update_product.yaml')
 def update(product_id):
     user_id = get_jwt_identity()
     product = Product.query.get(product_id)
@@ -54,6 +57,7 @@ def update(product_id):
 
 @api_bp.route('/products/<int:product_id>', methods=['PATCH'])
 @jwt_required()
+@swag_from('../../swagger_docs/destroy_product.yaml')
 def destroy(product_id):
     user_id = get_jwt_identity()
     product = Product.query.get(product_id)
@@ -74,6 +78,7 @@ def destroy(product_id):
 
 @api_bp.route('/products', methods=['GET'])
 @jwt_required()
+@swag_from('../../swagger_docs/get_products.yaml')
 def get_all():
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
@@ -87,7 +92,7 @@ def get_all():
         is_expired = None
 
     query = Product.query
-    print(user.role)
+
     if user.role != UserRole.ADMIN:
         query = query.filter_by(user_id=user_id)
 

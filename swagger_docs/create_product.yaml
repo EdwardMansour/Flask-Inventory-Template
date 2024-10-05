@@ -1,0 +1,79 @@
+tags:
+  - Product Management
+summary: Create a new product
+description: Endpoint for creating a new product
+parameters:
+  - in: header
+    name: Authorization
+    description: JWT access token
+    required: true
+    schema:
+      type: string
+      format: JWT
+  - in: body
+    name: body
+    description: Product object that needs to be added to the store
+    required: true
+    schema:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the product
+        amount:
+          type: number
+          format: float
+          description: The amount of the product
+        expiry_date:
+          type: string
+          description: The expiry date of the product
+      required:
+        - name
+        - price
+        - expiry_date
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          name:
+            type: string
+            description: The name of the product
+          amount:
+            type: number
+            format: float
+            description: The amount of the product
+          expiry_date:
+            type: string
+            description: The expiry date of the product
+        required:
+          - name
+          - price
+          - quantity
+responses:
+  201:
+    description: Product successfully created
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            id:
+              type: integer
+              description: The ID of the created product
+            name:
+                type: string
+                description: The name of the product
+            amount:
+                type: number
+                format: float
+                description: The amount of the product
+            expiry_date:
+                type: string
+                description: The expiry date of the product
+            is_destroyed:
+                type: boolean
+                description: The status of the product
+  400:
+    description: Validation error

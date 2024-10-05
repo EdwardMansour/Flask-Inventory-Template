@@ -1,0 +1,49 @@
+tags:
+  - User Management
+summary: User login
+description: Endpoint for user login
+parameters:
+  - in: body
+    name: body
+    description: User object that needs to be added to the store
+    required: true
+    schema:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username for login
+        password:
+          type: string
+          description: The password for login
+      required:
+        - username
+        - password
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          username:
+            type: string
+            description: The username for login
+          password:
+            type: string
+            description: The password for login
+        required:
+          - username
+          - password
+responses:
+  200:
+    description: User successfully logged in
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            access_token:
+              type: string
+              description: JWT access token
+  401:
+    description: Invalid username or password
