@@ -7,6 +7,7 @@ from app.services import create_product, update_product, destroy_product
 from app.schemas import ProductSchema, CreateProductSchema, UpdateProductSchema
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+from .. import db
 from ..models import Product, User, UserRole
 
 
@@ -33,8 +34,8 @@ def create():
 @swag_from('../../swagger_docs/update_product.yaml')
 def update(product_id):
     user_id = get_jwt_identity()
-    product = Product.query.get(product_id)
-    user = User.query.get(user_id)
+    product = db.session.get(Product, product_id)
+    user = db.session.get(User, user_id)
 
     if product is None:
         return jsonify({"message": "Product not found"}), 404
@@ -59,9 +60,11 @@ def update(product_id):
 @jwt_required()
 @swag_from('../../swagger_docs/destroy_product.yaml')
 def destroy(product_id):
+
     user_id = get_jwt_identity()
-    product = Product.query.get(product_id)
-    user = User.query.get(user_id)
+
+    product = db.session.get(Product, product_id)
+    user = db.session.get(User, user_id)
 
     if product is None:
         return jsonify({"message": "Product not found"}), 404
@@ -81,7 +84,8 @@ def destroy(product_id):
 @swag_from('../../swagger_docs/get_products.yaml')
 def get_all():
     user_id = get_jwt_identity()
-    user = User.query.get(user_id)
+
+    user = db.session.get(User, user_id)
 
     expired = request.args.get('is_expired', default=None)
     if expired == 'true':

@@ -34,8 +34,9 @@ The application is built using the Flask framework and includes endpoints for cr
   - `PATCH /products/<int:product_id>`: Mark a product as destroyed.
   - `GET /products`: Retrieve a list of products, with optional filtering by expiry status.
 
-### Swagger Documentation
-- You can reach the Swagger documentation by navigating to [http://localhost:5000/apidocs](http://localhost:5000/apidocs).
+### API Documentation
+
+ - The API documentation is available at [http://localhost:5000/apidocs](http://localhost:5000/apidocs) after running the application.
 
 ![Swagger View](swagger-view.png)
 
@@ -92,6 +93,8 @@ I have created a `.env.local` file for local development and an `.env.docker` fi
 
 To deploy the app on your Docker machine, navigate to the project directory open your terminal and run:
 
+**Note:** Be careful if there is any container running on the same port.
+
 ```ssh
 docker compose up --build -d
 ```
@@ -104,3 +107,30 @@ Now you are ready to test your application. I created an admin user for you. You
     "password" : "Pass1234"
 }
 ```
+### Unit Tests
+
+To run tests using `pytest`, follow these steps:
+
+1. Install `pytest` if you haven't already:
+    ```sh
+    pip install pytest
+    ```
+
+2. Run the tests:
+    ```sh
+    pytest
+    ```
+   or for logging
+    ```sh
+    pytest -s
+    ```
+
+This will discover and run all the tests in your project.
+
+### Postman collection and environment
+
+I have created a Postman collection and environment for you to test the API. You can find them in the `postman` folder.
+
+### Summary
+
+You have successfully set up the Flask API template with user authentication and product management endpoints. You can now start building your application on top of this template.

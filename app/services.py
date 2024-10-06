@@ -35,7 +35,8 @@ def create_product(user_id, name, amount, expiry_date):
 
 
 def update_product(product_id, name, amount, expiry_date):
-    product = Product.query.get(product_id)
+    product = db.session.get(Product, product_id)
+
     if product:
         product.name = name
         product.amount = amount
@@ -45,7 +46,8 @@ def update_product(product_id, name, amount, expiry_date):
 
 
 def destroy_product(product_id):
-    product = Product.query.get(product_id)
+    product = db.session.get(Product, product_id)
+
     if product:
         product.is_destroyed = True
         db.session.commit()
